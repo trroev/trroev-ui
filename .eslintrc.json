@@ -4,6 +4,7 @@
     "plugin:@shopify/react",
     "plugin:@shopify/prettier",
     "plugin:tailwindcss/recommended",
-    "next/core-web-vitals"
+    "next/core-web-vitals",
+    "plugin:storybook/recommended"
   ]
 }
