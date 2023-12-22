@@ -1,10 +1,9 @@
 import type { Metadata } from 'next'
 
 import { geist, inter } from '@/lib/fonts'
+import { cn } from '@/lib/utils'
 
 import '@/styles/globals.css'
-
-import { cn } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'trroev UI',
