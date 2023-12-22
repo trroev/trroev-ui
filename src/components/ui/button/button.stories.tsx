@@ -87,3 +87,30 @@ export const Secondary: Story = {
     variant: 'secondary',
   },
 }
+
+export const AllVariantsAndSizes = () => (
+  <div className="flex flex-col gap-3">
+    {buttonVariants.map((variant) => (
+      <div key={variant} className="flex gap-3">
+        {buttonSizes.map((size) => (
+          <Button
+            key={`${variant}-${size}`}
+            variant={
+              variant as
+                | 'default'
+                | 'destructive'
+                | 'outline'
+                | 'secondary'
+                | 'ghost'
+                | 'link'
+            }
+            size={size as 'default' | 'sm' | 'lg' | 'icon'}
+            onClick={action(`${variant}-${size} clicked`)}
+          >
+            {size === 'icon' ? 'X' : `${variant} ${size}`}
+          </Button>
+        ))}
+      </div>
+    ))}
+  </div>
+)
