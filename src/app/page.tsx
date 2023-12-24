@@ -1,9 +1,11 @@
-import { Button } from '@/components/ui/button/button'
+import { Button } from '@/components/ui/button'
+import { Icons } from '@/components/icons'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex flex-col items-center gap-12 p-24">
       <h1 className="font-geist text-7xl">Hello World</h1>
+      <Icons.pizza />
       <Button>Button</Button>
     </main>
   )
