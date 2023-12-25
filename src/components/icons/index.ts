@@ -1,5 +1,5 @@
 import { Pizza } from 'lucide-react'
 
-export const Icons = {
+export const Icon = {
   pizza: Pizza,
 }

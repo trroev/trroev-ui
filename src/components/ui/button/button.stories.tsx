@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions'
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Button, type ButtonProps } from './'
+import { Button, type ButtonProps } from './button'
 
 const buttonVariants = [
   'default',
