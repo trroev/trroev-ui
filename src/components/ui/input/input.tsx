@@ -3,12 +3,22 @@ import { cva, VariantProps } from 'cva'
 
 import { cn } from '@/lib/utils'
 
+type InputType =
+  | 'email'
+  | 'file'
+  | 'password'
+  | 'number'
+  | 'search'
+  | 'tel'
+  | 'text'
+  | 'url'
+
 const inputVariants = cva(
-  'flex h-10 w-full px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+  'flex rounded-md border bg-background h-10 w-full px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       variant: {
-        default: 'rounded-md border border-input bg-background',
+        default: '',
       },
     },
     defaultVariants: {
@@ -19,20 +29,25 @@ const inputVariants = cva(
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement>,
-    VariantProps<typeof inputVariants> {}
+    VariantProps<typeof inputVariants> {
+  type?: InputType
+}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, variant, type, ...props }, ref) => {
+  ({ className, variant, type = 'text', ...props }, ref) => {
     return (
-      <input
-        className={cn(inputVariants({ variant, className }))}
-        ref={ref}
-        type={type}
-        {...props}
-      />
+      <div className="flex items-center">
+        <input
+          className={cn(inputVariants({ variant, className }))}
+          ref={ref}
+          type={type}
+          {...props}
+        />
+      </div>
     )
   }
 )
+
 Input.displayName = 'Input'
 
 export { Input }
