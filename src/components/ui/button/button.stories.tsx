@@ -5,11 +5,11 @@ import { Button, type ButtonProps } from './button'
 
 const buttonVariants = [
   'default',
-  'destructive',
+  'warning',
+  'minimal',
+  'link',
   'outline',
   'secondary',
-  'ghost',
-  'link',
 ]
 const buttonSizes = ['default', 'sm', 'lg', 'icon']
 
@@ -57,16 +57,16 @@ export const Default: Story = {
   },
 }
 
-export const Destructive: Story = {
+export const Warning: Story = {
   args: {
-    children: 'Destructive Button',
-    variant: 'destructive',
+    children: 'Warning Button',
+    variant: 'warning',
   },
 }
-export const Ghost: Story = {
+export const Minimal: Story = {
   args: {
-    children: 'Ghost Button',
-    variant: 'ghost',
+    children: 'Minimal Button',
+    variant: 'minimal',
   },
 }
 export const Link: Story = {
@@ -98,11 +98,11 @@ export const AllVariantsAndSizes = () => (
             variant={
               variant as
                 | 'default'
-                | 'destructive'
+                | 'warning'
+                | 'minimal'
+                | 'link'
                 | 'outline'
                 | 'secondary'
-                | 'ghost'
-                | 'link'
             }
             size={size as 'default' | 'sm' | 'lg' | 'icon'}
             onClick={action(`${variant}-${size} clicked`)}
