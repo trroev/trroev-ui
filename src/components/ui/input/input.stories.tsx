@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { Input, type InputProps } from './input'
+import { Input, type InputProps } from '.'
 
 const inputVariants = ['default']
 
@@ -33,7 +33,6 @@ const argTypes = {
     control: 'text',
     description: 'The placeholder of the input.',
   },
-
   disabled: {
     control: 'boolean',
     description: 'If true, the input will be disabled.',
