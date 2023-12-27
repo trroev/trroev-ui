@@ -1,5 +1,6 @@
-import { Pizza } from 'lucide-react'
+import { Check, Pizza } from 'lucide-react'
 
 export const Icon = {
+  check: Check,
   pizza: Pizza,
 }
