@@ -36,18 +36,16 @@ export interface InputProps
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, variant, type = 'text', ...props }, ref) => {
     return (
-      <div className="flex items-center">
-        <input
-          className={cn(inputVariants({ variant, className }))}
-          ref={ref}
-          type={type}
-          {...props}
-        />
-      </div>
+      <input
+        className={cn(inputVariants({ variant, className }))}
+        ref={ref}
+        type={type}
+        {...props}
+      />
     )
   }
 )
 
 Input.displayName = 'Input'
 
-export { Input }
+export { Input, inputVariants }
