@@ -4,16 +4,6 @@ import { Input, type InputProps } from '.'
 
 const inputVariants = ['default']
 
-const inputTypes = [
-  'email',
-  'password',
-  'number',
-  'search',
-  'tel',
-  'text',
-  'url',
-]
-
 const argTypes = {
   variant: {
     control: {
@@ -23,10 +13,6 @@ const argTypes = {
     description: 'The variant of the input.',
   },
   type: {
-    control: {
-      type: 'select',
-      options: inputTypes,
-    },
     description: 'The type of the input.',
   },
   placeholder: {
@@ -57,5 +43,6 @@ export const Default: Story = {
   args: {
     variant: 'default',
     placeholder: 'Start Typing...',
+    type: 'text',
   },
 }

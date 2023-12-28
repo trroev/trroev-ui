@@ -4,13 +4,16 @@ import { cva, VariantProps } from 'cva'
 import { cn } from '@/lib/utils'
 
 type InputType =
+  | 'date'
   | 'email'
   | 'file'
-  | 'password'
+  | 'image'
   | 'number'
+  | 'password'
   | 'search'
   | 'tel'
   | 'text'
+  | 'time'
   | 'url'
 
 const inputVariants = cva(
