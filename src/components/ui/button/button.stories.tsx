@@ -11,7 +11,7 @@ const buttonVariants = [
   'outline',
   'secondary',
 ]
-const buttonSizes = ['default', 'sm', 'lg', 'icon']
+const buttonSizes = ['icon', 'sm', 'default', 'lg']
 
 const argTypes = {
   variant: {

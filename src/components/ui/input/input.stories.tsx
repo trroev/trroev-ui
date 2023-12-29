@@ -1,10 +1,10 @@
-import { Meta, StoryObj } from '@storybook/react'
+import { ArgTypes, Meta, StoryObj } from '@storybook/react'
 
 import { Input, type InputProps } from '.'
 
 const inputVariants = ['default']
 
-const argTypes = {
+const argTypes: ArgTypes = {
   variant: {
     control: {
       type: 'select',
