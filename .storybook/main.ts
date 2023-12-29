@@ -8,6 +8,12 @@ const config: StorybookConfig = {
     '@storybook/addon-interactions',
     '@storybook/addon-links',
     '@storybook/addon-onboarding',
+    {
+      name: '@storybook/addon-styling',
+      options: {
+        postCss: true,
+      },
+    },
   ],
   framework: {
     name: '@storybook/nextjs',
