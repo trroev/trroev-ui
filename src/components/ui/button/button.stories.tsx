@@ -5,8 +5,8 @@ import { Button, type ButtonProps } from '.'
 
 const buttonVariants = [
   'default',
-  'warning',
-  'minimal',
+  'destructive',
+  'ghost',
   'link',
   'outline',
   'secondary',
@@ -57,16 +57,16 @@ export const Default: Story = {
   },
 }
 
-export const Warning: Story = {
+export const Destructive: Story = {
   args: {
-    children: 'Warning Button',
-    variant: 'warning',
+    children: 'Destructive Button',
+    variant: 'destructive',
   },
 }
-export const Minimal: Story = {
+export const Ghost: Story = {
   args: {
-    children: 'Minimal Button',
-    variant: 'minimal',
+    children: 'Ghost Button',
+    variant: 'ghost',
   },
 }
 export const Link: Story = {
@@ -98,8 +98,8 @@ export const AllVariantsAndSizes = () => (
             variant={
               variant as
                 | 'default'
-                | 'warning'
-                | 'minimal'
+                | 'destructive'
+                | 'ghost'
                 | 'link'
                 | 'outline'
                 | 'secondary'
