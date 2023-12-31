@@ -1,5 +1,6 @@
 import { action } from '@storybook/addon-actions'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, Story, StoryObj } from '@storybook/react'
+import { render } from 'react-dom'
 
 import { Button, type ButtonProps } from '.'
 
@@ -31,86 +32,115 @@ const argTypes = {
   },
 }
 
-const meta: Meta<ButtonProps> = {
+export default {
   title: 'UI/Button',
   component: Button,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
-  args: {
-    onClick: action('onClick'),
-    size: 'default',
-    disabled: false,
-  },
   argTypes,
+  decorators: [
+    (Story) => (
+      <div className="flex h-screen w-full items-center justify-center">
+        <Story />
+      </div>
+    ),
+  ],
+} as Meta<typeof Button>
+
+const defaultProps: ButtonProps = {
+  onClick: action('onClick'),
+  size: 'default',
+  disabled: false,
 }
 
-export default meta
+const Template = (args: ButtonProps) => {
+  return <Button {...defaultProps} {...args} />
+}
 
-type Story = StoryObj<typeof Button>
+export const Default = {
+  render: Template,
 
-export const Default: Story = {
   args: {
+    ...defaultProps,
     children: 'Default Button',
     variant: 'default',
   },
 }
 
-export const Destructive: Story = {
+export const Destructive = {
+  render: Template,
+
   args: {
+    ...defaultProps,
     children: 'Destructive Button',
     variant: 'destructive',
   },
 }
-export const Ghost: Story = {
+
+export const Ghost = {
+  render: Template,
+
   args: {
+    ...defaultProps,
     children: 'Ghost Button',
     variant: 'ghost',
   },
 }
-export const Link: Story = {
+
+export const Link = {
+  render: Template,
+
   args: {
+    ...defaultProps,
     children: 'Link Button',
     variant: 'link',
   },
 }
-export const Outline: Story = {
+
+export const Outline = {
+  render: Template,
+
   args: {
+    ...defaultProps,
     children: 'Outline Button',
     variant: 'outline',
   },
 }
-export const Secondary: Story = {
+
+export const Secondary = {
+  render: Template,
+
   args: {
+    ...defaultProps,
     children: 'Secondary Button',
     variant: 'secondary',
   },
 }
 
 export const AllVariantsAndSizes = () => (
-  <div className="flex flex-col gap-3">
-    {buttonVariants.map((variant) => (
-      <div key={variant} className="flex gap-3">
-        {buttonSizes.map((size) => (
-          <Button
-            key={`${variant}-${size}`}
-            variant={
-              variant as
-                | 'default'
-                | 'destructive'
-                | 'ghost'
-                | 'link'
-                | 'outline'
-                | 'secondary'
-            }
-            size={size as 'default' | 'sm' | 'lg' | 'icon'}
-            onClick={action(`${variant}-${size} clicked`)}
-          >
-            {size === 'icon' ? 'X' : `${variant} ${size}`}
-          </Button>
-        ))}
-      </div>
-    ))}
+  <div className="flex h-screen w-full items-center justify-center">
+    <div className="flex flex-col gap-3">
+      {buttonVariants.map((variant) => (
+        <div key={variant} className="flex gap-3">
+          {buttonSizes.map((size) => (
+            <Button
+              key={`${variant}-${size}`}
+              variant={
+                variant as
+                  | 'default'
+                  | 'destructive'
+                  | 'ghost'
+                  | 'link'
+                  | 'outline'
+                  | 'secondary'
+              }
+              size={size as 'default' | 'sm' | 'lg' | 'icon'}
+              onClick={action(`${variant}-${size} clicked`)}
+            >
+              {size === 'icon' ? 'X' : `${variant} ${size}`}
+            </Button>
+          ))}
+        </div>
+      ))}
+    </div>
   </div>
 )
