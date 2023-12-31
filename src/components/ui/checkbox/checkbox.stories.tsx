@@ -18,7 +18,7 @@ export default {
   argTypes,
   decorators: [
     (Story) => (
-      <div className="flex h-screen w-full items-center justify-center">
+      <div className="flex min-h-20 w-full items-center justify-center">
         <Story />
       </div>
     ),
