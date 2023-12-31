@@ -39,9 +39,14 @@ export const Default = {
   args: { ...defaultProps },
 }
 
-export const WithLabel = () => (
+export const WithLabel = (args: CheckboxProps) => (
   <div className="flex items-center space-x-2">
-    <Checkbox id="terms" {...defaultProps} aria-label="Terms Checkbox" />
+    <Checkbox
+      {...defaultProps}
+      {...args}
+      id="terms"
+      aria-label="Terms Checkbox"
+    />
     <Label htmlFor="terms">Accept Terms and Conditions</Label>
   </div>
 )
