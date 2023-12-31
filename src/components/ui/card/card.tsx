@@ -7,6 +7,7 @@ const cardVariants = cva('border bg-card text-card-foreground', {
   variants: {
     variant: {
       default: '',
+      withBackgroundImage: 'relative overflow-hidden',
     },
     isBlurred: {
       true: 'backdrop-blur-md backdrop-saturate-150',
