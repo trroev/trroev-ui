@@ -1,6 +1,5 @@
 import { action } from '@storybook/addon-actions'
-import type { Meta, Story, StoryObj } from '@storybook/react'
-import { render } from 'react-dom'
+import type { Meta } from '@storybook/react'
 
 import { Button, type ButtonProps } from '.'
 
