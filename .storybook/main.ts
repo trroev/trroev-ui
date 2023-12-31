@@ -22,14 +22,15 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
-  webpackFinal: async (config) => {
-    config.resolve = config.resolve ?? {}
-    config.resolve.alias = config.resolve.alias ?? {}
-    // Alias '@' to point to the 'src' directory
-    config.resolve.alias['@'] = path.resolve(__dirname, '../src/')
-
-    // Important: return the modified config
-    return config
-  },
+  webpackFinal: async (config: any) => ({
+    ...config,
+    resolve: {
+      ...config.resolve,
+      alias: {
+        ...config.resolve.alias,
+        '@': path.resolve(__dirname, '../src/'),
+      },
+    },
+  }),
 }
 export default config
