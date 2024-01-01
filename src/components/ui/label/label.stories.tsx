@@ -1,15 +1,13 @@
-import { Meta, StoryObj } from '@storybook/react'
+import { Meta, Story, StoryObj } from '@storybook/react'
 
 import { Label, LabelProps } from '.'
 import { Input } from '../input'
-
-const labelVariants = ['defualt']
 
 const argTypes = {
   variant: {
     control: {
       type: 'select',
-      options: labelVariants,
+      options: ['default'],
     },
     description: 'The variant of the label.',
   },
@@ -20,40 +18,42 @@ const argTypes = {
   },
 }
 
-const meta: Meta<LabelProps> = {
+export default {
   title: 'UI/Label',
   component: Label,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   argTypes,
+  decorators: [
+    (Story) => (
+      <div className="flex h-screen w-full items-center justify-center">
+        <Story />
+      </div>
+    ),
+  ],
+} as Meta<typeof Label>
+
+const defaultProps: LabelProps = {
+  variant: 'default',
+  children: 'Label Text',
 }
 
-export default meta
+const Template = (args: LabelProps) => <Label {...args}>{args.children}</Label>
 
-type Story = StoryObj<typeof Label>
+const WithInputTemplate = (args: LabelProps) => (
+  <div className="flex w-[350px] flex-col gap-1.5">
+    <Label htmlFor="email" {...args} />
+    <Input type="email" id="email" placeholder="jane.doe@email.com" />
+  </div>
+)
 
-export const Default: Story = {
-  args: {
-    variant: 'default',
-    children: 'Label Text',
-  },
+export const Default = {
+  render: Template,
+
+  args: { ...defaultProps },
 }
 
-export const WithInput: Story = {
-  args: {
-    variant: 'default',
-    children: 'Label Text',
-  },
-  render: (args) => (
-    <div className="flex w-full min-w-96 flex-col gap-1.5">
-      <Label htmlFor="email" {...args} />
-      <Input
-        type="email"
-        id="email"
-        placeholder="trevor.mathiak@fusionary.com"
-      />
-    </div>
-  ),
+export const WithInput = {
+  render: WithInputTemplate,
+
+  args: { ...defaultProps },
 }
