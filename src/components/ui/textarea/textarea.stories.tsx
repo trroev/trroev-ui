@@ -1,6 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react'
+import { Meta } from '@storybook/react'
 
 import { Textarea, type TextareaProps } from '.'
+import { Button, Label } from '..'
 
 const textareaVariants = ['default']
 
@@ -22,23 +23,45 @@ const argTypes = {
   },
 }
 
-const meta: Meta<TextareaProps> = {
+export default {
   title: 'UI/Textarea',
   component: Textarea,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   argTypes,
+  decorators: [
+    (Story) => (
+      <div className="flex h-screen w-full items-center justify-center">
+        <Story />
+      </div>
+    ),
+  ],
+} as Meta<typeof Textarea>
+
+const defaultProps: TextareaProps = {
+  variant: 'default',
+  placeholder: 'Start Typing...',
 }
 
-export default meta
+const Template = (args: TextareaProps) => (
+  <Textarea {...args} className="w-[350px]" />
+)
 
-type Story = StoryObj<typeof Textarea>
+const WithLabelTemplate = (args: TextareaProps) => (
+  <div className="flex flex-col gap-1.5">
+    <Label>Message</Label>
+    <Textarea {...args} className="w-[350px]" />
+    <Button type="submit">Submit</Button>
+  </div>
+)
 
-export const Default: Story = {
-  args: {
-    variant: 'default',
-    placeholder: 'Start Typing...',
-  },
+export const Default = {
+  render: Template,
+
+  args: { ...defaultProps },
+}
+
+export const WithLabel = {
+  render: WithLabelTemplate,
+
+  args: { ...defaultProps },
 }
