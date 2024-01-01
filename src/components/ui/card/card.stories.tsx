@@ -12,6 +12,7 @@ import {
 } from '.'
 import { Button } from '..'
 import bigSur from '../../../../public/images/big-sur.jpg'
+import fireworks from '../../../../public/images/fireworks.jpg'
 
 const argTypes = {
   variant: {
@@ -124,7 +125,7 @@ const BodyImageTemplate = (args: CardProps) => (
     <CardContent className="flex justify-center">
       <Image
         alt="Card background"
-        src={bigSur}
+        src={fireworks}
         className="h-[200px] w-full rounded-xl object-cover object-center"
       />
     </CardContent>
