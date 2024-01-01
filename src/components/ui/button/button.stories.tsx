@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions'
-import type { Meta } from '@storybook/react'
+import type { ArgTypes, Meta } from '@storybook/react'
 
 import { Button, type ButtonProps } from '.'
 
@@ -13,7 +13,7 @@ const buttonVariants = [
 ]
 const buttonSizes = ['icon', 'sm', 'default', 'lg']
 
-const argTypes = {
+const argTypes: ArgTypes = {
   variant: {
     control: {
       type: 'select',
@@ -38,7 +38,7 @@ export default {
   argTypes,
   decorators: [
     (Story) => (
-      <div className="flex h-screen w-full items-center justify-center">
+      <div className="flex h-full w-full items-center justify-center">
         <Story />
       </div>
     ),
@@ -54,6 +54,36 @@ const defaultProps: ButtonProps = {
 const Template = (args: ButtonProps) => {
   return <Button {...defaultProps} {...args} />
 }
+
+const AllVariantsAndSizesTemplate = (args: ButtonProps) => (
+  <div className="flex h-full w-full items-center justify-center">
+    <div className="flex flex-col gap-3">
+      {buttonVariants.map((variant) => (
+        <div key={variant} className="flex gap-3">
+          {buttonSizes.map((size) => (
+            <Button
+              {...args}
+              key={`${variant}-${size}`}
+              variant={
+                variant as
+                  | 'default'
+                  | 'destructive'
+                  | 'ghost'
+                  | 'link'
+                  | 'outline'
+                  | 'secondary'
+              }
+              size={size as 'default' | 'sm' | 'lg' | 'icon'}
+              onClick={action(`${variant}-${size} clicked`)}
+            >
+              {size === 'icon' ? 'X' : `${variant} ${size}`}
+            </Button>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+)
 
 export const Default = {
   render: Template,
@@ -115,31 +145,11 @@ export const Secondary = {
   },
 }
 
-export const AllVariantsAndSizes = () => (
-  <div className="flex h-screen w-full items-center justify-center">
-    <div className="flex flex-col gap-3">
-      {buttonVariants.map((variant) => (
-        <div key={variant} className="flex gap-3">
-          {buttonSizes.map((size) => (
-            <Button
-              key={`${variant}-${size}`}
-              variant={
-                variant as
-                  | 'default'
-                  | 'destructive'
-                  | 'ghost'
-                  | 'link'
-                  | 'outline'
-                  | 'secondary'
-              }
-              size={size as 'default' | 'sm' | 'lg' | 'icon'}
-              onClick={action(`${variant}-${size} clicked`)}
-            >
-              {size === 'icon' ? 'X' : `${variant} ${size}`}
-            </Button>
-          ))}
-        </div>
-      ))}
-    </div>
-  </div>
-)
+export const AllVariantsAndSizes = {
+  render: AllVariantsAndSizesTemplate,
+
+  args: {
+    ...defaultProps,
+    children: 'All Variants and Sizes',
+  },
+}
