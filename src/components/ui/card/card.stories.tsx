@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Meta } from '@storybook/react'
+import { ArgTypes, Meta } from '@storybook/react'
 
 import {
   Card,
@@ -14,7 +14,7 @@ import { Button } from '..'
 import bigSur from '../../../../public/images/big-sur.jpg'
 import fireworks from '../../../../public/images/fireworks.jpg'
 
-const argTypes = {
+const argTypes: ArgTypes = {
   variant: {
     control: {
       type: 'select',

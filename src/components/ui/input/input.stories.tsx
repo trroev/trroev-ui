@@ -1,14 +1,13 @@
-import { ArgTypes, Meta, StoryObj } from '@storybook/react'
+import { ArgTypes, Meta } from '@storybook/react'
 
 import { Input, type InputProps } from '.'
-
-const inputVariants = ['default']
+import { Label } from '..'
 
 const argTypes: ArgTypes = {
   variant: {
     control: {
       type: 'select',
-      options: inputVariants,
+      options: ['default', 'underlined'],
     },
     description: 'The variant of the input.',
   },
@@ -25,24 +24,43 @@ const argTypes: ArgTypes = {
   },
 }
 
-const meta: Meta<InputProps> = {
+export default {
   title: 'UI/Input',
   component: Input,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   argTypes,
+  decorators: [
+    (Story) => (
+      <div className="flex h-full w-full items-center justify-center">
+        <Story />
+      </div>
+    ),
+  ],
+} as Meta<typeof Input>
+
+const defaultProps: InputProps = {
+  type: 'text',
+  placeholder: 'Start Typing...',
+  disabled: false,
 }
 
-export default meta
+const Template = (args: InputProps) => <Input {...args} className="max-w-md" />
 
-type Story = StoryObj<typeof Input>
+const WithLabelTemplate = (args: InputProps) => (
+  <div className="flex w-full max-w-sm flex-col gap-1.5">
+    <Label htmlFor="email">Email</Label>
+    <Input {...args} type="email" id="email" placeholder="jane.doe@email.com" />
+  </div>
+)
 
-export const Default: Story = {
-  args: {
-    variant: 'default',
-    placeholder: 'Start Typing...',
-    type: 'text',
-  },
+export const Default = {
+  render: Template,
+
+  args: { ...defaultProps },
+}
+
+export const WithLabel = {
+  render: WithLabelTemplate,
+
+  args: { ...defaultProps },
 }

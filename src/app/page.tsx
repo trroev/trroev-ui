@@ -2,9 +2,9 @@ import {
   Button,
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
+  CardSubtitle,
   CardTitle,
   Checkbox,
   Input,
@@ -21,7 +21,7 @@ export default function Home() {
       <Card className="max-w-sm" radius="lg" isBlurred>
         <CardHeader>
           <CardTitle>Card Title</CardTitle>
-          <CardDescription>Card Description</CardDescription>
+          <CardSubtitle>Card Description</CardSubtitle>
         </CardHeader>
         <CardContent>
           <p>Card Content</p>
