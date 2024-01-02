@@ -1,13 +1,16 @@
 import * as React from 'react'
-import Image from 'next/image'
 import { cva, VariantProps } from 'cva'
 
 import { cn } from '@/lib/utils'
 
 const avatarVariants = cva('relative flex shrink-0 overflow-hidden', {
   variants: {
-    variant: {
-      default: 'rounded-full',
+    radius: {
+      none: 'rounded-none',
+      sm: 'rounded-sm',
+      md: 'rounded-md',
+      lg: 'rounded-lg',
+      full: 'rounded-full',
     },
     size: {
       xs: 'h-6 w-6',
@@ -18,7 +21,7 @@ const avatarVariants = cva('relative flex shrink-0 overflow-hidden', {
     },
   },
   defaultVariants: {
-    variant: 'default',
+    radius: 'full',
     size: 'md',
   },
 })
@@ -31,9 +34,9 @@ export interface AvatarImageProps
   extends React.ImgHTMLAttributes<HTMLImageElement> {}
 
 const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
-  ({ className, variant, size, ...props }, ref) => (
+  ({ className, radius, size, ...props }, ref) => (
     <span
-      className={cn(avatarVariants({ variant, size, className }))}
+      className={cn(avatarVariants({ radius, size, className }))}
       ref={ref}
       {...props}
     />

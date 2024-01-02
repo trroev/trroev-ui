@@ -3,23 +3,19 @@ import { Meta } from '@storybook/react'
 import { Avatar, AvatarImage, AvatarProps } from '.'
 
 const argTypes = {
-  variant: {
+  radius: {
     control: {
       type: 'select',
-      options: ['default'],
+      options: ['none', 'sm', 'md', 'lg', 'full'],
     },
-    description: 'The variant of the button.',
+    description: 'The border-radius of the avatar.',
   },
   size: {
     control: {
       type: 'select',
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
     },
-    description: 'The size of the button.',
-  },
-  disabled: {
-    control: 'boolean',
-    description: 'If true, the button will be disabled.',
+    description: 'The size of the avatar.',
   },
 }
 
@@ -27,7 +23,7 @@ export default {
   title: 'UI/Avatar',
   component: Avatar,
   tags: ['autodocs'],
-  argTypes: {},
+  argTypes,
   decorators: [
     (Story) => (
       <div className="flex h-full w-full items-center justify-center">
