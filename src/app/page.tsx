@@ -1,46 +1,25 @@
-import {
-  Button,
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardSubtitle,
-  CardTitle,
-  Checkbox,
-  Input,
-  Label,
-  Textarea,
-} from '@/components/ui/'
-import { Icon } from '@/components/icons'
+import { Accordion, AccordionItem, Avatar, AvatarImage } from '@/components/ui/'
 
 export default function Home() {
+  const accordionContent =
+    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis possimus odio sequi hic maiores, unde saepe tempora laborum quam iusto totam, expedita beatae! Odio, laboriosam?'
   return (
     <main className="flex flex-col items-center gap-12 p-24">
       <h1 className="font-geist text-7xl">Hello World</h1>
-      <Icon.pizza className="h-20 w-20" />
-      <Card className="max-w-sm" radius="lg" isBlurred>
-        <CardHeader>
-          <CardTitle>Card Title</CardTitle>
-          <CardSubtitle>Card Description</CardSubtitle>
-        </CardHeader>
-        <CardContent>
-          <p>Card Content</p>
-        </CardContent>
-        <CardFooter>
-          <p>Card Footer</p>
-        </CardFooter>
-      </Card>
-      <div className="flex w-full max-w-sm flex-col gap-1.5">
-        <Label htmlFor="email">Email</Label>
-        <Input
-          type="email"
-          id="email"
-          placeholder="trevor.mathiak@fusionary.com"
-        />
-        <Checkbox />
-        <Textarea placeholder="Start Typing..." />
-      </div>
-      <Button>Button</Button>
+      <Avatar>
+        <AvatarImage src="https://github.com/trroev.png" alt="trroev" />
+      </Avatar>
+      <Accordion className="w-full">
+        <AccordionItem title="Accordion Item 1">
+          {accordionContent}
+        </AccordionItem>
+        <AccordionItem title="Accordion Item 2">
+          {accordionContent}
+        </AccordionItem>
+        <AccordionItem title="Accordion Item 3">
+          {accordionContent}
+        </AccordionItem>
+      </Accordion>
     </main>
   )
 }
