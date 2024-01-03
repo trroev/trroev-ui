@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react'
 
-import { Avatar, AvatarImage, AvatarProps } from '.'
+import { Avatar, AvatarFallback, AvatarImage, AvatarProps } from '.'
 
 const argTypes = {
   radius: {
@@ -43,8 +43,22 @@ const Template = (args: AvatarProps) => {
   )
 }
 
+const FallbackTemplate = (args: AvatarProps) => {
+  return (
+    <Avatar {...defaultProps} {...args}>
+      <AvatarFallback>TM</AvatarFallback>
+    </Avatar>
+  )
+}
+
 export const Default = {
   render: Template,
+
+  args: { ...defaultProps },
+}
+
+export const WithFallback = {
+  render: FallbackTemplate,
 
   args: { ...defaultProps },
 }
