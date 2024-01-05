@@ -39,6 +39,7 @@ const Template = (args: AvatarProps) => {
   return (
     <Avatar {...defaultProps} {...args}>
       <AvatarImage src="https://github.com/trroev.png" alt="trroev" />
+      <AvatarFallback>TM</AvatarFallback>
     </Avatar>
   )
 }
@@ -46,6 +47,7 @@ const Template = (args: AvatarProps) => {
 const FallbackTemplate = (args: AvatarProps) => {
   return (
     <Avatar {...defaultProps} {...args}>
+      <AvatarImage src="https://broken.link.com/broken-pic.jpg" alt="broken" />
       <AvatarFallback>TM</AvatarFallback>
     </Avatar>
   )

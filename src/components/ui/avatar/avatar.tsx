@@ -30,12 +30,6 @@ export interface AvatarProps
   extends React.HTMLAttributes<HTMLSpanElement>,
     VariantProps<typeof avatarVariants> {}
 
-export interface AvatarImageProps
-  extends React.ImgHTMLAttributes<HTMLImageElement> {}
-
-export interface AvatarFallbackProps
-  extends React.HTMLAttributes<HTMLSpanElement> {}
-
 const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
   ({ className, radius, size, ...props }, ref) => (
     <span
@@ -47,29 +41,75 @@ const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
 )
 Avatar.displayName = 'Avatar'
 
+export interface AvatarImageProps
+  extends React.ImgHTMLAttributes<HTMLImageElement> {}
+
 const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
-  ({ className, ...props }, ref) => (
-    <img
-      className={cn('aspect-square h-full w-full', className)}
-      ref={ref}
-      {...props}
-    />
-  )
+  ({ className, src, ...props }, ref) => {
+    const loadingState = useImageLoadingState(src)
+
+    return loadingState === 'loaded' ? (
+      <img
+        className={cn('aspect-square h-full w-full', className)}
+        src={src}
+        ref={ref}
+        {...props}
+      />
+    ) : null
+  }
 )
 AvatarImage.displayName = 'AvatarImage'
 
+export interface AvatarFallbackProps
+  extends React.HTMLAttributes<HTMLSpanElement> {}
+
 const AvatarFallback = React.forwardRef<HTMLSpanElement, AvatarFallbackProps>(
-  ({ className, ...props }, ref) => (
-    <span
-      className={cn(
-        'flex h-full w-full items-center justify-center rounded-full bg-muted',
-        className
-      )}
-      ref={ref}
-      {...props}
-    />
-  )
+  ({ className, ...props }, ref) => {
+    return (
+      <span
+        className={cn(
+          'flex h-full w-full items-center justify-center bg-muted',
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
 )
 AvatarFallback.displayName = 'AvatarFallback'
+
+type ImageLoadingState = 'idle' | 'loading' | 'loaded' | 'error'
+
+const useImageLoadingState = (src?: string) => {
+  const [loadingState, setLoadingState] =
+    React.useState<ImageLoadingState>('idle')
+
+  React.useLayoutEffect(() => {
+    if (!src) {
+      setLoadingState('error')
+      return
+    }
+
+    let isMounted = true
+    const image = new window.Image()
+
+    const updateState = (status: ImageLoadingState) => () => {
+      if (!isMounted) return
+      setLoadingState(status)
+    }
+
+    setLoadingState('loading')
+    image.onload = updateState('loaded')
+    image.onerror = updateState('error')
+    image.src = src
+
+    return () => {
+      isMounted = false
+    }
+  }, [src])
+
+  return loadingState
+}
 
 export { Avatar, AvatarFallback, AvatarImage, avatarVariants }
