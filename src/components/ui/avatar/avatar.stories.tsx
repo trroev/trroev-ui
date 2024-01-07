@@ -35,23 +35,19 @@ export default {
 
 const defaultProps: AvatarProps = {}
 
-const Template = (args: AvatarProps) => {
-  return (
-    <Avatar {...defaultProps} {...args}>
-      <AvatarImage src="https://github.com/trroev.png" alt="trroev" />
-      <AvatarFallback>TM</AvatarFallback>
-    </Avatar>
-  )
-}
+const Template = (args: AvatarProps) => (
+  <Avatar {...defaultProps} {...args}>
+    <AvatarImage src="https://github.com/trroev.png" alt="trroev" />
+    <AvatarFallback>TM</AvatarFallback>
+  </Avatar>
+)
 
-const FallbackTemplate = (args: AvatarProps) => {
-  return (
-    <Avatar {...defaultProps} {...args}>
-      <AvatarImage src="https://broken.link.com/broken-pic.jpg" alt="broken" />
-      <AvatarFallback>TM</AvatarFallback>
-    </Avatar>
-  )
-}
+const FallbackTemplate = (args: AvatarProps) => (
+  <Avatar {...defaultProps} {...args}>
+    <AvatarImage src="https://broken.link.com/broken-pic.jpg" alt="broken" />
+    <AvatarFallback>TM</AvatarFallback>
+  </Avatar>
+)
 
 export const Default = {
   render: Template,
@@ -59,7 +55,7 @@ export const Default = {
   args: { ...defaultProps },
 }
 
-export const WithFallback = {
+export const WithBrokenImageFallback = {
   render: FallbackTemplate,
 
   args: { ...defaultProps },
