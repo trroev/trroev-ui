@@ -6,7 +6,7 @@ const argTypes = {
   variant: {
     control: {
       type: 'select',
-      options: ['default', 'secondary', 'destructive', 'outline'],
+      options: ['default', 'secondary', 'warning', 'outline'],
     },
     description: 'The variant of the badge.',
   },
@@ -44,7 +44,7 @@ const Template = (args: BadgeProps) => (
 const AllVariantsAndRadiiTemplate = (args: BadgeProps) => (
   <div className="flex h-full w-full items-center justify-center">
     <div className="flex flex-col gap-3">
-      {['default', 'secondary', 'destructive', 'outline'].map((variant) => (
+      {['default', 'secondary', 'warning', 'outline'].map((variant) => (
         <div key={variant} className="flex gap-3">
           {['none', 'sm', 'md', 'lg', 'full'].map((radius) => (
             <Badge
@@ -52,7 +52,7 @@ const AllVariantsAndRadiiTemplate = (args: BadgeProps) => (
               {...defaultProps}
               {...args}
               variant={
-                variant as 'default' | 'destructive' | 'secondary' | 'outline'
+                variant as 'default' | 'warning' | 'secondary' | 'outline'
               }
               radius={radius as 'none' | 'sm' | 'md' | 'lg' | 'full'}
             >
@@ -85,13 +85,13 @@ export const Secondary = {
   },
 }
 
-export const Destructive = {
+export const warning = {
   render: Template,
 
   args: {
     ...defaultProps,
     children: 'Badge',
-    variant: 'destructive',
+    variant: 'warning',
   },
 }
 

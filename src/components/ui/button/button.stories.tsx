@@ -5,7 +5,7 @@ import { Button, type ButtonProps } from '.'
 
 const buttonVariants = [
   'default',
-  'destructive',
+  'warning',
   'ghost',
   'link',
   'outline',
@@ -67,7 +67,7 @@ const AllVariantsAndSizesTemplate = (args: ButtonProps) => (
               variant={
                 variant as
                   | 'default'
-                  | 'destructive'
+                  | 'warning'
                   | 'ghost'
                   | 'link'
                   | 'outline'
@@ -95,13 +95,13 @@ export const Default = {
   },
 }
 
-export const Destructive = {
+export const warning = {
   render: Template,
 
   args: {
     ...defaultProps,
-    children: 'Destructive Button',
-    variant: 'destructive',
+    children: 'Warning Button',
+    variant: 'warning',
   },
 }
 
