@@ -55,6 +55,14 @@ const Template = (args: ButtonProps) => {
   return <Button {...defaultProps} {...args} />
 }
 
+const AsChildTemplate = (args: ButtonProps) => {
+  return (
+    <Button {...defaultProps} {...args} asChild>
+      <span>Span Button</span>
+    </Button>
+  )
+}
+
 const AllVariantsAndSizesTemplate = (args: ButtonProps) => (
   <div className="flex h-full w-full items-center justify-center">
     <div className="flex flex-col gap-3">
@@ -142,6 +150,15 @@ export const Secondary = {
     ...defaultProps,
     children: 'Secondary Button',
     variant: 'secondary',
+  },
+}
+
+export const AsChild = {
+  render: AsChildTemplate,
+
+  args: {
+    ...defaultProps,
+    children: 'Button as child',
   },
 }
 
