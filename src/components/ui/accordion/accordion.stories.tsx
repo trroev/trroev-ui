@@ -27,7 +27,7 @@ const Template = (args: AccordionProps) => {
 
   return (
     <div className="w-[350px]">
-      <Accordion className="w-full">
+      <Accordion {...args} className="w-[500px]">
         <AccordionItem title="Accordion Item 1">
           {accordionContent}
         </AccordionItem>
