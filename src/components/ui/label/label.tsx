@@ -1,29 +1,15 @@
 import * as React from 'react'
-import { cva, VariantProps } from 'cva'
 
 import { cn } from '@/lib/utils'
 
-const labelVariants = cva(
-  'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-  {
-    variants: {
-      variant: {
-        default: '',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-    },
-  }
-)
+import { Base } from '../base-elements'
+import { LabelVariantProps, labelVariants } from './label-variants'
 
-export interface LabelProps
-  extends React.LabelHTMLAttributes<HTMLLabelElement>,
-    VariantProps<typeof labelVariants> {
-  variant?: 'default'
-}
+type LabelElement = React.ElementRef<typeof Base.label>
+type BaseLabelProps = React.ComponentProps<typeof Base.label>
+interface LabelProps extends BaseLabelProps, LabelVariantProps {}
 
-const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
+const Label = React.forwardRef<LabelElement, LabelProps>(
   ({ className, variant, ...props }, ref) => {
     return (
       <label
@@ -34,7 +20,7 @@ const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
     )
   }
 )
-
 Label.displayName = 'Label'
 
-export { Label, labelVariants }
+export { Label }
+export type { LabelProps }

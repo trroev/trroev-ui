@@ -1,4 +1,4 @@
-import { Meta, Story, StoryObj } from '@storybook/react'
+import { Meta } from '@storybook/react'
 
 import { Label, LabelProps } from '.'
 import { Input } from '../input'
