@@ -1,5 +1,6 @@
 import { CheckboxProps } from '@radix-ui/react-checkbox'
 import { Meta } from '@storybook/react'
+import { render } from 'react-dom'
 
 import { Checkbox } from '.'
 import { Label } from '../label'
@@ -30,8 +31,15 @@ const defaultProps: CheckboxProps = {
 }
 
 const Template = (args: CheckboxProps) => {
-  return <Checkbox {...defaultProps} {...args} aria-label="Default Checkbox" />
+  return <Checkbox {...args} aria-label="Default Checkbox" />
 }
+
+const WithLabelTemplate = (args: CheckboxProps) => (
+  <div className="flex items-center space-x-2">
+    <Checkbox {...args} id="terms" aria-label="Terms Checkbox" />
+    <Label htmlFor="terms">Accept Terms and Conditions</Label>
+  </div>
+)
 
 export const Default = {
   render: Template,
@@ -39,14 +47,8 @@ export const Default = {
   args: { ...defaultProps },
 }
 
-export const WithLabel = (args: CheckboxProps) => (
-  <div className="flex items-center space-x-2">
-    <Checkbox
-      {...defaultProps}
-      {...args}
-      id="terms"
-      aria-label="Terms Checkbox"
-    />
-    <Label htmlFor="terms">Accept Terms and Conditions</Label>
-  </div>
-)
+export const WithLabel = {
+  render: WithLabelTemplate,
+
+  args: { ...defaultProps },
+}
