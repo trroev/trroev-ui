@@ -1,40 +1,19 @@
 'use client'
 
 import * as React from 'react'
-import { cva, VariantProps } from 'cva'
 
 import { cn } from '@/lib/utils'
 
-const avatarVariants = cva('relative flex shrink-0 overflow-hidden', {
-  variants: {
-    radius: {
-      none: 'rounded-none',
-      sm: 'rounded-sm',
-      md: 'rounded-md',
-      lg: 'rounded-lg',
-      full: 'rounded-full',
-    },
-    size: {
-      xs: 'h-6 w-6',
-      sm: 'h-8 w-8',
-      md: 'h-10 w-10',
-      lg: 'h-12 w-12',
-      xl: 'h-14 w-14',
-    },
-  },
-  defaultVariants: {
-    radius: 'full',
-    size: 'md',
-  },
-})
+import { Base } from '../base-elements'
+import { AvatarVariantProps, avatarVariants } from './avatar-variants'
 
-export interface AvatarProps
-  extends React.HTMLAttributes<HTMLSpanElement>,
-    VariantProps<typeof avatarVariants> {}
+type AvatarElement = React.ElementRef<typeof Base.span>
+type BaseAvatarProps = React.ComponentProps<typeof Base.span>
+interface AvatarProps extends BaseAvatarProps, AvatarVariantProps {}
 
-const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
+const Avatar = React.forwardRef<AvatarElement, AvatarProps>(
   ({ className, radius, size, ...props }, ref) => (
-    <span
+    <Base.span
       className={cn(avatarVariants({ radius, size, className }))}
       ref={ref}
       {...props}
@@ -43,15 +22,16 @@ const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
 )
 Avatar.displayName = 'Avatar'
 
-export interface AvatarImageProps
-  extends React.ImgHTMLAttributes<HTMLImageElement> {}
+type AvatarImageElement = React.ElementRef<typeof Base.img>
+type BaseAvatarImageProps = React.ComponentProps<typeof Base.img>
+interface AvatarImageProps extends BaseAvatarImageProps {}
 
-const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
+const AvatarImage = React.forwardRef<AvatarImageElement, AvatarImageProps>(
   ({ className, src, ...props }, ref) => {
     const loadingState = useImageLoadingState(src)
 
     return loadingState === 'loaded' ? (
-      <img
+      <Base.img
         className={cn('aspect-square h-full w-full', className)}
         src={src}
         ref={ref}
@@ -62,23 +42,25 @@ const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
 )
 AvatarImage.displayName = 'AvatarImage'
 
-export interface AvatarFallbackProps
-  extends React.HTMLAttributes<HTMLSpanElement> {}
+type AvatarFallbackElement = React.ElementRef<typeof Base.span>
+type BaseAvatarFallbackProps = React.ComponentProps<typeof Base.span>
+interface AvatarFallbackProps extends BaseAvatarFallbackProps {}
 
-const AvatarFallback = React.forwardRef<HTMLSpanElement, AvatarFallbackProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <span
-        className={cn(
-          'flex h-full w-full items-center justify-center bg-muted',
-          className
-        )}
-        ref={ref}
-        {...props}
-      />
-    )
-  }
-)
+const AvatarFallback = React.forwardRef<
+  AvatarFallbackElement,
+  AvatarFallbackProps
+>(({ className, ...props }, ref) => {
+  return (
+    <Base.span
+      className={cn(
+        'flex h-full w-full items-center justify-center bg-muted',
+        className
+      )}
+      ref={ref}
+      {...props}
+    />
+  )
+})
 AvatarFallback.displayName = 'AvatarFallback'
 
 type ImageLoadingState = 'idle' | 'loading' | 'loaded' | 'error'
@@ -114,4 +96,5 @@ const useImageLoadingState = (src?: string) => {
   return loadingState
 }
 
-export { Avatar, AvatarFallback, AvatarImage, avatarVariants }
+export { Avatar, AvatarFallback, AvatarImage }
+export type { AvatarProps, AvatarFallbackProps, AvatarImageProps }
