@@ -1,4 +1,11 @@
-import { Accordion, AccordionItem, Avatar, AvatarImage } from '@/components/ui/'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTitle,
+  Avatar,
+  AvatarImage,
+} from '@/components/ui/'
 
 export default function Home() {
   const accordionContent =
@@ -10,14 +17,17 @@ export default function Home() {
         <AvatarImage src="https://github.com/trroev.png" alt="trroev" />
       </Avatar>
       <Accordion className="w-full">
-        <AccordionItem title="Accordion Item 1">
-          {accordionContent}
+        <AccordionItem>
+          <AccordionTitle>Accordion Title 1</AccordionTitle>
+          <AccordionContent>{accordionContent}</AccordionContent>
         </AccordionItem>
-        <AccordionItem title="Accordion Item 2">
-          {accordionContent}
+        <AccordionItem>
+          <AccordionTitle>Accordion Title 2</AccordionTitle>
+          <AccordionContent>{accordionContent}</AccordionContent>
         </AccordionItem>
-        <AccordionItem title="Accordion Item 3">
-          {accordionContent}
+        <AccordionItem>
+          <AccordionTitle>Accordion Title 3</AccordionTitle>
+          <AccordionContent>{accordionContent}</AccordionContent>
         </AccordionItem>
       </Accordion>
     </main>

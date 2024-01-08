@@ -1,7 +1,13 @@
 import { action } from '@storybook/addon-actions'
 import { Meta } from '@storybook/react'
 
-import { Accordion, AccordionItem, AccordionProps } from '.'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionProps,
+  AccordionTitle,
+} from '.'
 
 export default {
   title: 'UI/Accordion',
@@ -27,15 +33,24 @@ const Template = (args: AccordionProps) => {
 
   return (
     <div className="w-[350px]">
-      <Accordion {...args} className="w-[500px]">
-        <AccordionItem title="Accordion Item 1">
-          {accordionContent}
+      <Accordion {...args} className="w-full">
+        <AccordionItem>
+          <AccordionTitle>Accordion Title 1</AccordionTitle>
+          <AccordionContent>
+            <p>{accordionContent}</p>
+          </AccordionContent>
         </AccordionItem>
-        <AccordionItem title="Accordion Item 2">
-          {accordionContent}
+        <AccordionItem>
+          <AccordionTitle>Accordion Title 2</AccordionTitle>
+          <AccordionContent>
+            <p>{accordionContent}</p>
+          </AccordionContent>
         </AccordionItem>
-        <AccordionItem title="Accordion Item 3">
-          {accordionContent}
+        <AccordionItem>
+          <AccordionTitle>Accordion Title 3</AccordionTitle>
+          <AccordionContent>
+            <p>{accordionContent}</p>
+          </AccordionContent>
         </AccordionItem>
       </Accordion>
     </div>
