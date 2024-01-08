@@ -14,6 +14,5 @@ const labelVariants = cva(
   }
 )
 
-export type LabelVariantProps = VariantProps<typeof labelVariants>
-
 export { labelVariants }
+export type LabelVariantProps = VariantProps<typeof labelVariants>

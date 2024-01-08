@@ -18,6 +18,7 @@ const NODES = [
   'section',
   'span',
   'svg',
+  'textarea',
   'ul',
 ] as const
 

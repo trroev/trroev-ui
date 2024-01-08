@@ -1,30 +1,18 @@
 import * as React from 'react'
-import { cva, VariantProps } from 'cva'
 
 import { cn } from '@/lib/utils'
 
-const textareaVariants = cva(
-  'flex min-h-20 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
-  {
-    variants: {
-      variant: {
-        default: '',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-    },
-  }
-)
+import { Base } from '../base-elements'
+import { TextareaVariantProps, textareaVariants } from './textarea-variants'
 
-export interface TextareaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-    VariantProps<typeof textareaVariants> {}
+type TextareaElement = React.ElementRef<typeof Base.textarea>
+type BaseTextareaProps = React.ComponentProps<typeof Base.textarea>
+interface TextareaProps extends BaseTextareaProps, TextareaVariantProps {}
 
-const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+const Textarea = React.forwardRef<TextareaElement, TextareaProps>(
   ({ className, variant, ...props }, ref) => {
     return (
-      <textarea
+      <Base.textarea
         className={cn(textareaVariants({ variant, className }))}
         ref={ref}
         {...props}
@@ -32,7 +20,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     )
   }
 )
-
 Textarea.displayName = 'Textarea'
 
-export { Textarea, textareaVariants }
+export { Textarea }
+export type { TextareaProps }

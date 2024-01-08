@@ -12,7 +12,7 @@ interface LabelProps extends BaseLabelProps, LabelVariantProps {}
 const Label = React.forwardRef<LabelElement, LabelProps>(
   ({ className, variant, ...props }, ref) => {
     return (
-      <label
+      <Base.label
         className={cn(labelVariants({ variant, className }))}
         ref={ref}
         {...props}
