@@ -3,6 +3,9 @@ import { cva, VariantProps } from 'cva'
 
 import { cn } from '@/lib/utils'
 
+import { Base } from '../base-elements'
+import { InputVariantProps, inputVariants } from './input-variants'
+
 type InputType =
   | 'date'
   | 'email'
@@ -15,34 +18,16 @@ type InputType =
   | 'text'
   | 'time'
   | 'url'
-
-const inputVariants = cva(
-  'flex bg-background h-10 w-full text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
-  {
-    variants: {
-      variant: {
-        default:
-          'rounded-md border px-3 py-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-        underlined:
-          'border-b px-1 py-2 focus-visible:border-b-2 focus-visible:border-ring',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-    },
-  }
-)
-
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement>,
-    VariantProps<typeof inputVariants> {
+type InputElement = React.ElementRef<typeof Base.input>
+type BaseInputProps = React.ComponentProps<typeof Base.input>
+interface InputProps extends BaseInputProps, InputVariantProps {
   type?: InputType
 }
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
+const Input = React.forwardRef<InputElement, InputProps>(
   ({ className, variant, type = 'text', ...props }, ref) => {
     return (
-      <input
+      <Base.input
         className={cn(inputVariants({ variant, className }))}
         ref={ref}
         type={type}
@@ -54,4 +39,5 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
 Input.displayName = 'Input'
 
-export { Input, inputVariants }
+export { Input }
+export type { InputProps }

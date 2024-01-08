@@ -8,7 +8,7 @@ import { Icon } from '@/components/icons'
 
 import { CheckboxVariantProps, checkboxVariants } from './checkbox-variants'
 
-export interface CheckboxProps
+interface CheckboxProps
   extends React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>,
     CheckboxVariantProps {}
 
@@ -39,3 +39,4 @@ const Checkbox = React.forwardRef<
 Checkbox.displayName = CheckboxPrimitive.Root.displayName
 
 export { Checkbox }
+export type { CheckboxProps }
