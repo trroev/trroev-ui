@@ -1,47 +1,18 @@
 import * as React from 'react'
-import { cva, VariantProps } from 'cva'
 
 import { cn } from '@/lib/utils'
 
-const cardVariants = cva('border bg-card text-card-foreground', {
-  variants: {
-    variant: {
-      default: '',
-      withBackgroundImage: 'relative overflow-hidden',
-    },
-    isBlurred: {
-      true: 'backdrop-blur-md backdrop-saturate-150',
-      false: '',
-    },
-    radius: {
-      none: '',
-      sm: 'rounded-sm',
-      md: 'rounded-md',
-      lg: 'rounded-lg',
-    },
-    shadow: {
-      none: '',
-      sm: 'shadow-sm',
-      md: 'shadow-md',
-      lg: 'shadow-lg',
-    },
-  },
-  defaultVariants: {
-    variant: 'default',
-    isBlurred: false,
-    radius: 'lg',
-    shadow: 'sm',
-  },
-})
+import { Base } from '../base-elements'
+import { CardVariantProps, cardVariants } from './card-variants'
 
-export interface CardProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof cardVariants> {}
+type CardElement = React.ElementRef<typeof Base.div>
+type BaseCardProps = React.ComponentProps<typeof Base.div>
+interface CardProps extends BaseCardProps, CardVariantProps {}
 
-const Card = React.forwardRef<HTMLDivElement, CardProps>(
+const Card = React.forwardRef<CardElement, CardProps>(
   ({ className, variant, isBlurred, radius, shadow, ...props }, ref) => {
     return (
-      <div
+      <Base.div
         className={cn(
           cardVariants({ variant, isBlurred, radius, shadow, className })
         )}
@@ -53,62 +24,77 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
 )
 Card.displayName = 'Card'
 
-const CardHeader = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
-  return (
-    <div
-      className={cn('flex flex-col space-y-1.5 p-6', className)}
+type CardHeaderElement = React.ElementRef<typeof Base.div>
+type BaseCardHeaderProps = React.ComponentProps<typeof Base.div>
+interface CardHeaderProps extends BaseCardHeaderProps {}
+
+const CardHeader = React.forwardRef<CardHeaderElement, CardHeaderProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <Base.div
+        className={cn('flex flex-col space-y-1.5 p-6', className)}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+CardHeader.displayName = 'CardHeader'
+
+type CardTitleElement = React.ElementRef<typeof Base.h3>
+type BaseCardTitleProps = React.ComponentProps<typeof Base.h3>
+interface CardTitleProps extends BaseCardTitleProps {}
+
+const CardTitle = React.forwardRef<CardTitleElement, CardTitleProps>(
+  ({ className, ...props }, ref) => (
+    <Base.h3
+      className={cn('text-2xl font-semibold leading-none tracking-tight')}
       ref={ref}
       {...props}
     />
   )
-})
-CardHeader.displayName = 'CardHeader'
-
-const CardTitle = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
-  <h3
-    className={cn('text-2xl font-semibold leading-none tracking-tight')}
-    ref={ref}
-    {...props}
-  />
-))
+)
 CardTitle.displayName = 'CardTitle'
 
-const CardSubtitle = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-  <p
-    ref={ref}
-    className={cn('text-sm text-muted-foreground', className)}
-    {...props}
-  />
-))
+type CardSubtitleElement = React.ElementRef<typeof Base.p>
+type BaseCardSubtitleProps = React.ComponentProps<typeof Base.p>
+interface CardSubtitleProps extends BaseCardSubtitleProps {}
+
+const CardSubtitle = React.forwardRef<CardSubtitleElement, CardSubtitleProps>(
+  ({ className, ...props }, ref) => (
+    <Base.p
+      ref={ref}
+      className={cn('text-sm text-muted-foreground', className)}
+      {...props}
+    />
+  )
+)
 CardSubtitle.displayName = 'CardSubtitle'
 
-const CardContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn('p-6 pt-0', className)} {...props} />
-))
+type CardContentElement = React.ElementRef<typeof Base.div>
+type BaseCardContentProps = React.ComponentProps<typeof Base.div>
+interface CardContentProps extends BaseCardContentProps {}
+
+const CardContent = React.forwardRef<CardContentElement, CardContentProps>(
+  ({ className, ...props }, ref) => (
+    <Base.div ref={ref} className={cn('p-6 pt-0', className)} {...props} />
+  )
+)
 CardContent.displayName = 'CardContent'
 
-const CardFooter = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn('flex items-center p-6 pt-0', className)}
-    {...props}
-  />
-))
+type CardFooterElement = React.ElementRef<typeof Base.div>
+type BaseCardFooterProps = React.ComponentProps<typeof Base.div>
+interface CardFooterProps extends BaseCardFooterProps {}
+
+const CardFooter = React.forwardRef<CardFooterElement, CardFooterProps>(
+  ({ className, ...props }, ref) => (
+    <Base.div
+      ref={ref}
+      className={cn('flex items-center p-6 pt-0', className)}
+      {...props}
+    />
+  )
+)
 CardFooter.displayName = 'CardFooter'
 
 export {
@@ -119,4 +105,12 @@ export {
   CardContent,
   CardFooter,
   cardVariants,
+}
+export type {
+  CardProps,
+  CardHeaderProps,
+  CardTitleProps,
+  CardSubtitleProps,
+  CardContentProps,
+  CardFooterProps,
 }

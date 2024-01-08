@@ -23,5 +23,5 @@ const avatarVariants = cva('relative flex shrink-0 overflow-hidden', {
   },
 })
 
-export type AvatarVariantProps = VariantProps<typeof avatarVariants>
 export { avatarVariants }
+export type AvatarVariantProps = VariantProps<typeof avatarVariants>
