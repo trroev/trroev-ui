@@ -5,6 +5,7 @@ import {
   AccordionTitle,
   Avatar,
   AvatarImage,
+  Checkbox,
 } from '@/components/ui/'
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center gap-12 p-24">
       <h1 className="font-geist text-7xl">Hello World</h1>
+      <Checkbox />
       <Avatar>
         <AvatarImage src="https://github.com/trroev.png" alt="trroev" />
       </Avatar>

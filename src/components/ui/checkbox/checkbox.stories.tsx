@@ -1,8 +1,6 @@
-import { CheckboxProps } from '@radix-ui/react-checkbox'
 import { Meta } from '@storybook/react'
-import { render } from 'react-dom'
 
-import { Checkbox } from '.'
+import { Checkbox, CheckboxProps } from '.'
 import { Label } from '../label'
 
 const argTypes = {
