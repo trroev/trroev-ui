@@ -2,23 +2,53 @@
 
 import * as React from 'react'
 
-import { cn } from '@/lib/utils'
+import { cn, createContext } from '@/lib/utils'
 
 import { Base } from '../base-elements'
 import { AvatarVariantProps, avatarVariants } from './avatar-variants'
+
+type AvatarContextType = {
+  imageLoadingState: ImageLoadingState
+  onImageLoadingStateChange(state: ImageLoadingState): void
+}
+
+const [useAvatarContext, AvatarProvider] = createContext<AvatarContextType>()
 
 type AvatarElement = React.ElementRef<typeof Base.span>
 type BaseAvatarProps = React.ComponentProps<typeof Base.span>
 interface AvatarProps extends BaseAvatarProps, AvatarVariantProps {}
 
 const Avatar = React.forwardRef<AvatarElement, AvatarProps>(
-  ({ className, radius, size, ...props }, ref) => (
-    <Base.span
-      className={cn(avatarVariants({ radius, size, className }))}
-      ref={ref}
-      {...props}
-    />
-  )
+  ({ className, radius, size, children, ...props }, ref) => {
+    const [imageLoadingState, setImageLoadingState] =
+      React.useState<ImageLoadingState>('idle')
+    const onImageLoadingStateChange = React.useCallback(
+      (state: ImageLoadingState) => {
+        setImageLoadingState(state)
+      },
+      []
+    )
+
+    const contextValue = React.useMemo(
+      () => ({
+        imageLoadingState,
+        onImageLoadingStateChange,
+      }),
+      [imageLoadingState, onImageLoadingStateChange]
+    )
+
+    return (
+      <AvatarProvider value={contextValue}>
+        <Base.span
+          className={cn(avatarVariants({ radius, size, className }))}
+          ref={ref}
+          {...props}
+        >
+          {children}
+        </Base.span>
+      </AvatarProvider>
+    )
+  }
 )
 Avatar.displayName = 'Avatar'
 
@@ -28,7 +58,8 @@ interface AvatarImageProps extends BaseAvatarImageProps {}
 
 const AvatarImage = React.forwardRef<AvatarImageElement, AvatarImageProps>(
   ({ className, src, ...props }, ref) => {
-    const loadingState = useImageLoadingState(src)
+    const { onImageLoadingStateChange } = useAvatarContext()
+    const loadingState = useImageLoadingState(src, onImageLoadingStateChange)
 
     return loadingState === 'loaded' ? (
       <Base.img
@@ -50,6 +81,12 @@ const AvatarFallback = React.forwardRef<
   AvatarFallbackElement,
   AvatarFallbackProps
 >(({ className, ...props }, ref) => {
+  const { imageLoadingState } = useAvatarContext()
+
+  if (imageLoadingState === 'loaded') {
+    return null
+  }
+
   return (
     <Base.span
       className={cn(
@@ -65,7 +102,10 @@ AvatarFallback.displayName = 'AvatarFallback'
 
 type ImageLoadingState = 'idle' | 'loading' | 'loaded' | 'error'
 
-const useImageLoadingState = (src?: string) => {
+const useImageLoadingState = (
+  src?: string,
+  onStateChange?: (state: ImageLoadingState) => void
+) => {
   const [loadingState, setLoadingState] =
     React.useState<ImageLoadingState>('idle')
 
@@ -81,6 +121,7 @@ const useImageLoadingState = (src?: string) => {
     const updateState = (status: ImageLoadingState) => () => {
       if (!isMounted) return
       setLoadingState(status)
+      onStateChange?.(status)
     }
 
     setLoadingState('loading')
@@ -91,7 +132,7 @@ const useImageLoadingState = (src?: string) => {
     return () => {
       isMounted = false
     }
-  }, [src])
+  }, [src, onStateChange])
 
   return loadingState
 }
