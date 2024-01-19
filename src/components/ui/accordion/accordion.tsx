@@ -2,10 +2,18 @@
 
 import * as React from 'react'
 
-import { cn } from '@/lib/utils'
+import { cn, createContext } from '@/lib/utils'
 import { Icon } from '@/components/icons'
 
 import { Base } from '../base-elements'
+
+type AccordionContextType = {
+  isOpen: boolean
+  toggleOpen: () => void
+}
+
+const [useAccordionContext, AccordionProvider] =
+  createContext<AccordionContextType>()
 
 type AccordionElement = React.ElementRef<typeof Base.div>
 type BaseAccordionProps = React.ComponentProps<typeof Base.div>
@@ -30,14 +38,26 @@ const AccordionItem = React.forwardRef<
   AccordionItemProps
 >(({ className, children, ...props }, ref) => {
   const [isOpen, setIsOpen] = React.useState(false)
-  const toggleOpen = () => setIsOpen(!isOpen)
+
+  const contextValue = React.useMemo(
+    () => ({
+      isOpen,
+      toggleOpen: () => setIsOpen(!isOpen),
+    }),
+    [isOpen]
+  )
 
   return (
-    <AccordionContext.Provider value={{ isOpen, toggleOpen }}>
-      <Base.div className={cn('border-b', className)} ref={ref} {...props}>
+    <AccordionProvider value={contextValue}>
+      <Base.div
+        className={cn('border-b', className)}
+        data-state={isOpen ? 'open' : 'closed'}
+        ref={ref}
+        {...props}
+      >
         {children}
       </Base.div>
-    </AccordionContext.Provider>
+    </AccordionProvider>
   )
 })
 AccordionItem.displayName = 'AccordionItem'
@@ -53,11 +73,18 @@ const AccordionTitle = React.forwardRef<
   const { isOpen, toggleOpen } = useAccordionContext()
 
   return (
-    <Base.h3 className="flex" ref={ref} {...props}>
+    <Base.h3
+      className="flex"
+      data-state={isOpen ? 'open' : 'closed'}
+      ref={ref}
+      {...props}
+    >
       <Base.button
         type="button"
         onClick={toggleOpen}
         className="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline"
+        data-state={isOpen ? 'open' : 'closed'}
+        aria-expanded={isOpen}
       >
         {children}
         <Icon.chevronDown
@@ -65,6 +92,7 @@ const AccordionTitle = React.forwardRef<
             'h-4 w-4 shrink-0 rotate-90 transition-transform duration-200',
             isOpen && 'rotate-0'
           )}
+          aria-hidden="true"
         />
       </Base.button>
     </Base.h3>
@@ -84,34 +112,19 @@ const AccordionContent = React.forwardRef<
   return (
     <Base.section
       className="overflow-hidden text-sm transition-all"
+      data-state={isOpen ? 'open' : 'closed'}
       ref={ref}
       {...props}
     >
-      {isOpen && <Base.div className="pb-4 pt-0">{children}</Base.div>}
+      {isOpen && (
+        <Base.div className="pb-4 pt-0" data-state={isOpen ? 'open' : 'closed'}>
+          {children}
+        </Base.div>
+      )}
     </Base.section>
   )
 })
 AccordionContent.displayName = 'AccordionContent'
-
-interface AccordionContextProps {
-  isOpen: boolean
-  toggleOpen: () => void
-}
-
-const AccordionContext = React.createContext<Partial<AccordionContextProps>>({
-  isOpen: false,
-  toggleOpen: () => {},
-})
-
-const useAccordionContext = () => {
-  const context = React.useContext(AccordionContext)
-  if (!context) {
-    throw new Error(
-      'Accordion compound components cannot be rendered outside the Accordion component'
-    )
-  }
-  return context as AccordionContextProps
-}
 
 export { Accordion, AccordionContent, AccordionItem, AccordionTitle }
 export type {
