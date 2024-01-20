@@ -44,8 +44,20 @@ const Template = (args: AvatarProps) => (
 
 const FallbackTemplate = (args: AvatarProps) => (
   <Avatar {...defaultProps} {...args}>
+    <AvatarFallback>TM</AvatarFallback>
+  </Avatar>
+)
+
+const FallbackWithBrokenImageTemplate = (args: AvatarProps) => (
+  <Avatar {...defaultProps} {...args}>
     <AvatarImage src="https://broken.link.com/broken-pic.jpg" alt="broken" />
     <AvatarFallback>TM</AvatarFallback>
+  </Avatar>
+)
+
+const FallbackWithBackgroundGradientTemplate = (args: AvatarProps) => (
+  <Avatar {...defaultProps} {...args}>
+    <AvatarFallback gradient="winter" />
   </Avatar>
 )
 
@@ -55,8 +67,20 @@ export const Default = {
   args: { ...defaultProps },
 }
 
-export const WithBrokenImageFallback = {
+export const WithFallback = {
   render: FallbackTemplate,
+
+  args: { ...defaultProps },
+}
+
+export const WithBrokenImageFallback = {
+  render: FallbackWithBrokenImageTemplate,
+
+  args: { ...defaultProps },
+}
+
+export const WithBackgroundGradientFallback = {
+  render: FallbackWithBackgroundGradientTemplate,
 
   args: { ...defaultProps },
 }

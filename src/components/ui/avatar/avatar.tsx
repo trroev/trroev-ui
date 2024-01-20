@@ -5,7 +5,12 @@ import * as React from 'react'
 import { cn, createContext } from '@/lib/utils'
 
 import { Base } from '../base-elements'
-import { AvatarVariantProps, avatarVariants } from './avatar-variants'
+import {
+  AvatarFallbackVariantProps,
+  avatarFallbackVariants,
+  AvatarVariantProps,
+  avatarVariants,
+} from './avatar-variants'
 
 type AvatarContextType = {
   imageLoadingState: ImageLoadingState
@@ -75,12 +80,14 @@ AvatarImage.displayName = 'AvatarImage'
 
 type AvatarFallbackElement = React.ElementRef<typeof Base.span>
 type BaseAvatarFallbackProps = React.ComponentProps<typeof Base.span>
-interface AvatarFallbackProps extends BaseAvatarFallbackProps {}
+interface AvatarFallbackProps
+  extends BaseAvatarFallbackProps,
+    AvatarFallbackVariantProps {}
 
 const AvatarFallback = React.forwardRef<
   AvatarFallbackElement,
   AvatarFallbackProps
->(({ className, ...props }, ref) => {
+>(({ className, gradient, ...props }, ref) => {
   const { imageLoadingState } = useAvatarContext()
 
   if (imageLoadingState === 'loaded') {
@@ -89,10 +96,7 @@ const AvatarFallback = React.forwardRef<
 
   return (
     <Base.span
-      className={cn(
-        'flex h-full w-full items-center justify-center bg-muted',
-        className
-      )}
+      className={cn(avatarFallbackVariants({ gradient }), className)}
       ref={ref}
       {...props}
     />
