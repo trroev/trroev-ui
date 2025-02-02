@@ -5,9 +5,9 @@ import {
 } from 'react'
 
 import { Content, Header, Item, Root, Trigger } from '@radix-ui/react-accordion'
-import { Plus } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
+import { RiAddLine } from '@remixicon/react'
 
 const Accordion = Root
 
@@ -50,7 +50,7 @@ const AccordionTrigger = forwardRef<
       ref={forwardedRef}
     >
       {children}
-      <Plus
+      <RiAddLine
         className={cn(
           // base
           'group-data-[state=open]:-rotate-45 size-5 shrink-0 transition-transform duration-150 ease-[cubic-bezier(0.87,_0,_0.13,_1)]',
