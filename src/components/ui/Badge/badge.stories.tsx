@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Badge } from './badge'
-import { badgeVariants } from './badge.variants'
+import { Badge, type BadgeProps } from './badge'
+import { badge } from './badge.variants'
 
 const meta: Meta<typeof Badge> = {
   title: 'ui/Badge',
   component: Badge,
   args: {
     children: 'Badge',
-  },
+  } satisfies BadgeProps,
   argTypes: {
     variant: {
       control: 'radio',
-      options: [...Object.keys(badgeVariants.variants.variant)],
+      options: [...Object.keys(badge.variants.variant)],
     },
   },
 }
