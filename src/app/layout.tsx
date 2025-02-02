@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import type { ReactNode } from 'react'
 
 import { geist, inter } from '@/lib/fonts'
 import { cn } from '@/lib/utils'
@@ -13,13 +14,13 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
   return (
     <html lang="en">
       <body
         className={cn(
-          'bg-background text-foreground font-inter min-h-screen antialiased',
+          'min-h-screen bg-background font-inter text-foreground antialiased',
           geist.variable,
           inter.variable
         )}
