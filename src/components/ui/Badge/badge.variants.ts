@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 import { type VariantProps, tv } from 'tailwind-variants'
 
-const badgeVariants = tv({
+const badge = tv({
   base: cn(
     'inline-flex items-center gap-x-1 whitespace-nowrap rounded-md px-2 py-1 font-medium text-xs ring-1 ring-inset'
   ),
@@ -34,7 +34,7 @@ const badgeVariants = tv({
   },
 })
 
-type BadgeVariantsProps = VariantProps<typeof badgeVariants>
+type BadgeVariantProps = VariantProps<typeof badge>
 
-export { badgeVariants }
-export type { BadgeVariantsProps }
+export { badge }
+export type { BadgeVariantProps }
