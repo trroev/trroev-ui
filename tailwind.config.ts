@@ -9,6 +9,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      animation: {
+        accordionOpen: 'accordionOpen 150ms cubic-bezier(0.87, 0, 0.13, 1)',
+        accordionClose: 'accordionClose 150ms cubic-bezier(0.87, 0, 0.13, 1)',
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -47,6 +51,18 @@ const config: Config = {
       fontFamily: {
         geist: ['var(--geist)', ...fontFamily.sans],
         inter: ['var(--inter)', ...fontFamily.sans],
+      },
+      keyframes: {
+        accordionOpen: {
+          from: { height: '0px' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        accordionClose: {
+          from: {
+            height: 'var(--radix-accordion-content-height)',
+          },
+          to: { height: '0px' },
+        },
       },
     },
   },

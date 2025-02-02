@@ -1,37 +1,30 @@
-import path from 'path'
-import type { StorybookConfig } from '@storybook/nextjs'
+import path from 'node:path'
+import type { StorybookConfig } from '@storybook/react-vite'
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
     '@storybook/addon-a11y',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@storybook/addon-links',
-    '@storybook/addon-onboarding',
-    {
-      name: '@storybook/addon-styling',
-      options: {
-        postCss: true,
-      },
-    },
   ],
   framework: {
-    name: '@storybook/nextjs',
+    name: '@storybook/react-vite',
     options: {},
   },
-  docs: {
-    autodocs: 'tag',
+  docs: {},
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
   },
-  webpackFinal: async (config: any) => ({
-    ...config,
-    resolve: {
-      ...config.resolve,
+  viteFinal: (config) => {
+    config.resolve = {
       alias: {
-        ...config.resolve.alias,
-        '@': path.resolve(__dirname, '../src/'),
+        '@': path.resolve(__dirname, '../src'),
       },
-    },
-  }),
+    }
+    return config
+  },
 }
+
 export default config

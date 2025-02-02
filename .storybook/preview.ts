@@ -1,22 +1,26 @@
 import type { Preview } from '@storybook/react'
+import { themes } from '@storybook/theming'
 
 import '../src/styles/globals.css'
 
-export const preview: Preview = {
+const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
       },
     },
-    options: {
-      storySort: {
-        includeName: true,
-        method: 'alphabetical',
-      },
+    docs: {
+      theme: window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? themes.dark
+        : themes.light,
     },
-    backgrounds: { disable: true },
+    themes: {
+      default: 'dark',
+    },
   },
+  tags: ['autodocs'],
 }
+
+export default preview

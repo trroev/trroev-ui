@@ -1,64 +1,55 @@
-import { action } from '@storybook/addon-actions'
-import { Meta } from '@storybook/react'
-
+import type { Meta, StoryObj } from '@storybook/react'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionProps,
-  AccordionTitle,
-} from '.'
+  AccordionTrigger,
+} from './accordion'
 
-export default {
-  title: 'UI/Accordion',
+const items = [
+  {
+    content:
+      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+    id: '1',
+    title: "What's the best thing about Switzerland?",
+  },
+  {
+    content:
+      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+    id: '2',
+    title: "What's the best thing about Switzerland?",
+  },
+  {
+    content:
+      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+    id: '3',
+    title: "What's the best thing about Switzerland?",
+  },
+  {
+    content:
+      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+    id: '4',
+    title: "What's the best thing about Switzerland?",
+  },
+]
+
+const meta: Meta<typeof Accordion> = {
+  title: 'ui/Accordion',
   component: Accordion,
-  tags: ['autodocs'],
-  argTypes: {},
-  decorators: [
-    (Story) => (
-      <div className="flex h-full w-full items-center justify-center">
-        <Story />
-      </div>
-    ),
-  ],
-} as Meta<typeof Accordion>
-
-const defaultProps: AccordionProps = {
-  onClick: action('onClick'),
 }
 
-const Template = (args: AccordionProps) => {
-  const accordionContent =
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis possimus odio sequi hic maiores, unde saepe tempora laborum quam iusto totam, expedita beatae! Odio, laboriosam?'
+export default meta
+type Story = StoryObj<typeof Accordion>
 
-  return (
-    <div className="w-[350px]">
-      <Accordion {...args} className="w-full">
-        <AccordionItem>
-          <AccordionTitle>Accordion Title 1</AccordionTitle>
-          <AccordionContent>
-            <p>{accordionContent}</p>
-          </AccordionContent>
+export const Default: Story = {
+  render: () => (
+    <Accordion collapsible type="single" className="mx-auto mt-3 max-w-sm">
+      {items.map((item) => (
+        <AccordionItem key={item.id} value={item.id}>
+          <AccordionTrigger>{item.title}</AccordionTrigger>
+          <AccordionContent>{item.content}</AccordionContent>
         </AccordionItem>
-        <AccordionItem>
-          <AccordionTitle>Accordion Title 2</AccordionTitle>
-          <AccordionContent>
-            <p>{accordionContent}</p>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem>
-          <AccordionTitle>Accordion Title 3</AccordionTitle>
-          <AccordionContent>
-            <p>{accordionContent}</p>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
-    </div>
-  )
-}
-
-export const Default = {
-  render: Template,
-
-  args: { ...defaultProps },
+      ))}
+    </Accordion>
+  ),
 }

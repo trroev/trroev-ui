@@ -1,135 +1,97 @@
-'use client'
+import {
+  type ComponentPropsWithoutRef,
+  type ComponentRef,
+  forwardRef,
+} from 'react'
 
-import * as React from 'react'
+import { Content, Header, Item, Root, Trigger } from '@radix-ui/react-accordion'
+import { Plus } from 'lucide-react'
 
-import { cn, createContext } from '@/lib/utils'
-import { Icon } from '@/components/icons'
+import { cn } from '@/lib/utils'
 
-import { Base } from '../base-elements'
+const Accordion = Root
 
-type AccordionContextType = {
-  isOpen: boolean
-  toggleOpen: () => void
-}
-
-const [useAccordionContext, AccordionProvider] =
-  createContext<AccordionContextType>()
-
-type AccordionElement = React.ElementRef<typeof Base.div>
-type BaseAccordionProps = React.ComponentProps<typeof Base.div>
-interface AccordionProps extends BaseAccordionProps {}
-
-const Accordion = React.forwardRef<AccordionElement, AccordionProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <Base.div className={className} ref={ref} {...props}>
-        {children}
-      </Base.div>
-    )
-  }
-)
-Accordion.displayName = 'Accordion'
-
-type AccordionItemElement = React.ElementRef<typeof Base.div>
-interface AccordionItemProps extends AccordionProps {}
-
-const AccordionItem = React.forwardRef<
-  AccordionItemElement,
-  AccordionItemProps
->(({ className, children, ...props }, ref) => {
-  const [isOpen, setIsOpen] = React.useState(false)
-
-  const contextValue = React.useMemo(
-    () => ({
-      isOpen,
-      toggleOpen: () => setIsOpen(!isOpen),
-    }),
-    [isOpen]
-  )
-
-  return (
-    <AccordionProvider value={contextValue}>
-      <Base.div
-        className={cn('border-b', className)}
-        data-state={isOpen ? 'open' : 'closed'}
-        ref={ref}
-        {...props}
-      >
-        {children}
-      </Base.div>
-    </AccordionProvider>
-  )
-})
+const AccordionItem = forwardRef<
+  ComponentRef<typeof Item>,
+  ComponentPropsWithoutRef<typeof Item>
+>(({ className, ...props }, forwardedRef) => (
+  <Item
+    ref={forwardedRef}
+    className={cn(
+      // base
+      'overflow-hidden border-b first:mt-0',
+      // border color
+      'border-border',
+      className
+    )}
+    {...props}
+  />
+))
 AccordionItem.displayName = 'AccordionItem'
 
-type AccordionTitleElement = React.ElementRef<typeof Base.h3>
-type BaseAccordionTitleProps = React.ComponentProps<typeof Base.h3>
-interface AccordionTitleProps extends BaseAccordionTitleProps {}
-
-const AccordionTitle = React.forwardRef<
-  AccordionTitleElement,
-  AccordionTitleProps
->(({ className, children, ...props }, ref) => {
-  const { isOpen, toggleOpen } = useAccordionContext()
-
-  return (
-    <Base.h3
-      className="flex"
-      data-state={isOpen ? 'open' : 'closed'}
-      ref={ref}
-      {...props}
-    >
-      <Base.button
-        type="button"
-        onClick={toggleOpen}
-        className="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline"
-        data-state={isOpen ? 'open' : 'closed'}
-        aria-expanded={isOpen}
-      >
-        {children}
-        <Icon.chevronDown
-          className={cn(
-            'h-4 w-4 shrink-0 rotate-90 transition-transform duration-200',
-            isOpen && 'rotate-0'
-          )}
-          aria-hidden="true"
-        />
-      </Base.button>
-    </Base.h3>
-  )
-})
-AccordionTitle.displayName = 'AccordionTitle'
-
-type AccordionContentElement = React.ElementRef<typeof Base.section>
-type BaseAccordionContentProps = React.ComponentProps<typeof Base.section>
-interface AccordionContentProps extends BaseAccordionContentProps {}
-
-const AccordionContent = React.forwardRef<
-  AccordionContentElement,
-  AccordionContentProps
->(({ className, children, ...props }, ref) => {
-  const { isOpen } = useAccordionContext()
-  return (
-    <Base.section
-      className="overflow-hidden text-sm transition-all"
-      data-state={isOpen ? 'open' : 'closed'}
-      ref={ref}
-      {...props}
-    >
-      {isOpen && (
-        <Base.div className="pb-4 pt-0" data-state={isOpen ? 'open' : 'closed'}>
-          {children}
-        </Base.div>
+const AccordionTrigger = forwardRef<
+  ComponentRef<typeof Trigger>,
+  ComponentPropsWithoutRef<typeof Trigger>
+>(({ className, children, ...props }, forwardedRef) => (
+  <Header className="flex">
+    <Trigger
+      className={cn(
+        // base
+        'group flex flex-1 cursor-pointer items-center justify-between py-3 text-left font-medium text-sm leading-none',
+        // text color
+        'text-background',
+        // disabled
+        'data-[disabled]:cursor-default data-[disabled]:text-gray-400 dark:data-[disabled]:text-gray-600',
+        //focus
+        'focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-inset',
+        className
       )}
-    </Base.section>
-  )
-})
-AccordionContent.displayName = 'AccordionContent'
+      {...props}
+      ref={forwardedRef}
+    >
+      {children}
+      <Plus
+        className={cn(
+          // base
+          'group-data-[state=open]:-rotate-45 size-5 shrink-0 transition-transform duration-150 ease-[cubic-bezier(0.87,_0,_0.13,_1)]',
+          // text color
+          'text-background',
+          // disabled
+          'group-data-[disabled]:text-gray-300 group-data-[disabled]:dark:text-gray-700'
+        )}
+        aria-hidden="true"
+        focusable="false"
+      />
+    </Trigger>
+  </Header>
+))
+AccordionTrigger.displayName = Trigger.displayName
 
-export { Accordion, AccordionContent, AccordionItem, AccordionTitle }
-export type {
-  AccordionProps,
-  AccordionContentProps,
-  AccordionItemProps,
-  AccordionTitleProps,
-}
+const AccordionContent = forwardRef<
+  ComponentRef<typeof Content>,
+  ComponentPropsWithoutRef<typeof Content>
+>(({ className, children, ...props }, forwardedRef) => (
+  <Content
+    ref={forwardedRef}
+    className={cn(
+      'transform-gpu data-[state=closed]:animate-accordionClose data-[state=open]:animate-accordionOpen'
+    )}
+    {...props}
+  >
+    <div
+      className={cn(
+        // base
+        'overflow-hidden pb-4 text-sm',
+        // text color
+        'text-background',
+        className
+      )}
+    >
+      {children}
+    </div>
+  </Content>
+))
+
+AccordionContent.displayName = Content.displayName
+
+export { Accordion, AccordionContent, AccordionItem, AccordionTrigger }
