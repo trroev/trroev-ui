@@ -110,7 +110,7 @@ const WithBackgroundImageAndFooterTemplate = (args: CardProps) => (
   <Card {...args} isFooterBlurred className="mx-auto h-[24rem] max-w-md">
     <CardHeader className="absolute top-1 z-10 flex-col items-start">
       <p className="font-bold text-background/60 text-xs uppercase">New</p>
-      <h4 className="font-medium text-2xl text-background">Acme camera</h4>
+      <h4 className="font-medium text-2xl text-background">MacBook Pro</h4>
     </CardHeader>
     <Image
       alt="Card example background"
@@ -121,8 +121,8 @@ const WithBackgroundImageAndFooterTemplate = (args: CardProps) => (
     />
     <CardFooter className="absolute bottom-0 z-10 justify-between border-border border-t bg-white/30">
       <div>
-        <p className="text-black text-xs">Available soon.</p>
-        <p className="text-black text-xs">Get notified.</p>
+        <p className="text-foreground text-xs">Available soon.</p>
+        <p className="text-foreground text-xs">Get notified.</p>
       </div>
       <button type="button">Notify Me</button>
     </CardFooter>

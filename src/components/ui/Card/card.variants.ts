@@ -148,9 +148,8 @@ const card = tv({
   },
 })
 
-type CardVariantProps = VariantProps<typeof card>
-type CardSlots = keyof ReturnType<typeof card>
-type CardReturnType = ReturnType<typeof card>
+export type CardVariantProps = VariantProps<typeof card>
+export type CardSlots = keyof ReturnType<typeof card>
+export type CardReturnType = ReturnType<typeof card>
 
 export { card }
-export type { CardVariantProps, CardSlots, CardReturnType }
