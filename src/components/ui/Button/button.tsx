@@ -17,9 +17,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       asChild,
       children,
       className,
-      disabled,
+      color,
+      fullWidth,
+      isDisabled,
       isLoading = false,
       loadingText,
+      radius,
+      size,
       variant,
       ...props
     }: ButtonProps,
@@ -30,8 +34,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <Comp
         ref={forwardedRef}
-        className={cn(button({ variant }), className)}
-        disabled={disabled || isLoading}
+        className={cn(
+          button({ color, fullWidth, isDisabled, radius, size, variant }),
+          className
+        )}
+        disabled={isDisabled || isLoading}
         {...props}
       >
         {isLoading ? (

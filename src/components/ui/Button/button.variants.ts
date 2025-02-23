@@ -2,7 +2,7 @@ import { type VariantProps, tv } from 'tailwind-variants'
 
 const button = tv({
   base: [
-    'z-10',
+    'z-0',
     'group',
     'relative',
     'inline-flex',
@@ -31,9 +31,9 @@ const button = tv({
       ghost: 'border-medium bg-transparent',
     },
     size: {
-      sm: 'px-3 min-w-16 h-8 text-tiny gap-2 rounded-small',
-      md: 'px-4 min-w-20 h-10 text-small gap-2 rounded-medium',
-      lg: 'px-6 min-w-24 h-12 text-medium gap-3 rounded-large',
+      sm: 'px-3 min-w-16 h-8 text-tiny gap-2',
+      md: 'px-4 min-w-20 h-10 text-small gap-2',
+      lg: 'px-6 min-w-24 h-12 text-medium gap-3',
     },
     color: {
       default: '',
@@ -45,9 +45,9 @@ const button = tv({
     },
     radius: {
       none: 'rounded-none',
-      small: 'rounded-small',
-      medium: 'rounded-medium',
-      large: 'rounded-large',
+      sm: 'rounded-small',
+      md: 'rounded-medium',
+      lg: 'rounded-large',
       full: 'rounded-full',
     },
     fullWidth: {
@@ -63,8 +63,41 @@ const button = tv({
     color: 'default',
     fullWidth: false,
     isDisabled: false,
+    radius: 'md',
   },
-  compoundVariants: [],
+  compoundVariants: [
+    // solid / color
+    {
+      variant: 'solid',
+      color: 'default',
+      className: 'bg-default text-default-foreground',
+    },
+    {
+      variant: 'solid',
+      color: 'primary',
+      className: 'bg-primary text-primary-foreground',
+    },
+    {
+      variant: 'solid',
+      color: 'secondary',
+      className: 'bg-secondary text-secondary-foreground',
+    },
+    {
+      variant: 'solid',
+      color: 'success',
+      className: 'bg-success text-success-foreground',
+    },
+    {
+      variant: 'solid',
+      color: 'warning',
+      className: 'bg-warning text-warning-foreground',
+    },
+    {
+      variant: 'solid',
+      color: 'danger',
+      className: 'bg-destructive text-destructive-foreground',
+    },
+  ],
 })
 
 export type ButtonVariantProps = VariantProps<typeof button>
