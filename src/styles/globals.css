@@ -4,47 +4,44 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --warning: 0 72.22% 50.59%;
-    --warning-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5% 64.9%;
-    --radius: 0.5rem;
+    --background: 100% 0 0;
+    --border: 91.97% 0.004 286.32;
+    --default: 87.11% 0.0055 286.29;
+    --default-foreground: 0% 0 0;
+    --destructive: 61.92% 0.2419 11.33;
+    --destructive-foreground: 100% 0 0;
+    --divider: 17.77% 0 0;
+    --foreground: 0% 0 0;
+    --input: 91.97% 0.004 286.32;
+    --primary: 56.71% 0.209478 257.9477;
+    --primary-foreground: 100% 0 0;
+    --ring: 71.19% 0.0129 286.07;
+    --secondary: 48.78% 0.2255 300.51;
+    --secondary-foreground: 100% 0 0;
+    --success: 73.29% 0.1934 150.82;
+    --success-foreground: 0% 0 0;
+    --warning: 78.19% 0.1585 72.32;
+    --warning-foreground: 0% 0 0;
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --warning: 0 62.8% 30.6%;
-    --warning-foreground: 0 85.7% 97.3%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    --background: 0% 0 0;
+    --border: 27.41% 0.0055 286.03;
+    --default: 37.03% 0.0119 285.81;
+    --default-foreground: 100% 0 0;
+    --destructive: 61.92% 0.2419 11.33;
+    --destructive-foreground: 100% 0 0;
+    --divider: 100% 0 0;
+    --foreground: 100% 0 0;
+    --input: 27.41% 0.0055 286.03;
+    --primary: 56.71% 0.209478 257.9477;
+    --primary-foreground: 100% 0 0;
+    --ring: 87.09% 0.0055 286.29;
+    --secondary: 57.68% 0.1916 304.03;
+    --secondary-foreground: 100% 0 0;
+    --success: 73.29% 0.1934 150.82;
+    --success-foreground: 0% 0 0;
+    --warning: 78.19% 0.1585 72.32;
+    --warning-foreground: 0% 0 0;
   }
 }

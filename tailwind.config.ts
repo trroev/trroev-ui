@@ -13,39 +13,41 @@ const config: Config = {
         accordionOpen: 'accordionOpen 150ms cubic-bezier(0.87, 0, 0.13, 1)',
         accordionClose: 'accordionClose 150ms cubic-bezier(0.87, 0, 0.13, 1)',
       },
+      borderRadius: {
+        small: '0.5rem',
+        medium: '0.75rem',
+        large: '0.875rem',
+      },
       colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
+        background: 'oklch(var(--background))',
+        border: 'oklch(var(--border))',
+        default: {
+          DEFAULT: 'oklch(var(--default))',
+          foreground: 'oklch(var(--default-foreground))',
         },
+        destructive: {
+          DEFAULT: 'oklch(var(--destructive))',
+          foreground: 'oklch(var(--destructive-foreground))',
+        },
+        divider: 'oklch(var(--divider))',
+        foreground: 'oklch(var(--foreground))',
+        input: 'oklch(var(--input))',
+        primary: {
+          DEFAULT: 'oklch(var(--primary))',
+          foreground: 'oklch(var(--primary-foreground))',
+        },
+        ring: 'oklch(var(--ring))',
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
+          DEFAULT: 'oklch(var(--secondary))',
+          foreground: 'oklch(var(--secondary-foreground))',
+        },
+        success: {
+          DEFAULT: 'oklch(var(--success))',
+          foreground: 'oklch(var(--success-foreground))',
         },
         warning: {
-          DEFAULT: 'hsl(var(--warning) / <alpha-value>)',
-          foreground: 'hsl(var(--warning-foreground) / <alpha-value>)',
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
-        },
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
+          DEFAULT: 'oklch(var(--warning) / <alpha-value>)',
+          foreground: 'oklch(var(--warning-foreground) / <alpha-value>)',
         },
       },
       fontFamily: {
